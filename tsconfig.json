@@ -1,0 +1,32 @@
+{
+  "ts-node": {
+    "files": true
+  },
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "lib": ["ESNext"],
+    "module": "commonjs",
+    "target": "ESNext",
+    "outDir": "dist",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "removeComments": true,
+    "strictPropertyInitialization": true,
+    "typeRoots": ["./types/global.d.ts"]
+  },
+
+  "include": ["./src/**/*", "./types/global.d.ts"],
+  "exclude": ["node_modules"]
+}
