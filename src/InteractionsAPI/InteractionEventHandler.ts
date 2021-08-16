@@ -2,7 +2,10 @@ import { Client, Interaction } from 'discord.js';
 import BaseInteractionManager from './Managers/BaseInteractionManager';
 
 export default class InteractionEventHandler {
-  managers: Map<{ new (): Interaction }, BaseInteractionManager>;
+  private managers: Map<{ new (): Interaction }, BaseInteractionManager>;
+  constructor() {
+    this.managers = new Map();
+  }
 
   hook(client: Client): void {
     client.addListener('interactionCreate', this._handleInteraction);
