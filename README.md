@@ -75,7 +75,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
 
 ```typescript
 import { ChatInputApplicationCommandData, CommandInteraction } from 'discord.js';
-import BaseInteractionHandler, { BaseInteractionHandlerOptions } from 'interaction-djs';
+import { BaseInteractionHandler, BaseInteractionHandlerOptions } from 'interaction-djs';
 // CommandInteractionHandler.ts
 
 export interface CommandInteractionHandlerOptions
