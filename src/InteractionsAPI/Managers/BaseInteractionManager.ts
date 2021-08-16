@@ -8,20 +8,20 @@ export default abstract class BaseInteractionManager<
 > {
   protected interactionHandlers: Map<ID_TYPE, H>;
   constructor(public _interactionCtor: { new (...args: any[]): I }) {
-  	this.interactionHandlers = new Map();
-  	this._interactionCtor = _interactionCtor;
+    this.interactionHandlers = new Map();
+    this._interactionCtor = _interactionCtor;
   }
 
   public registerInteractionHandler(id: ID_TYPE, handler: H): void {
-  	this.interactionHandlers.set(id, handler);
+    this.interactionHandlers.set(id, handler);
   }
 
   public removeInteractionHandler(id: ID_TYPE): boolean {
-  	return this.interactionHandlers.delete(id);
+    return this.interactionHandlers.delete(id);
   }
 
   protected getInteractionHandler(interaction: I): H | undefined {
-  	return this.interactionHandlers.get(this.getInteractionId(interaction));
+    return this.interactionHandlers.get(this.getInteractionId(interaction));
   }
 
   protected abstract getInteractionId(interaction: I): ID_TYPE;
@@ -29,6 +29,6 @@ export default abstract class BaseInteractionManager<
   protected abstract callInteraction(interaction: I): void;
 
   public onInteraction(interaction: I): void {
-  	this.callInteraction(interaction);
+    this.callInteraction(interaction);
   }
 }
