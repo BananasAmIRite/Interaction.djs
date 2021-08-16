@@ -16,5 +16,5 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
     manager.registerInteractionHandler(commandOptions.name, this);
   }
 
-  public abstract run(interaction: CommandInteraction): Promise<any>;
+  public abstract run(interaction: CommandInteraction): Promise<unknown>;
 }
