@@ -8,16 +8,16 @@ export default class InteractionEventHandler {
   }
 
   hook(client: Client): void {
-    client.addListener('interactionCreate', this._handleInteraction);
+    client.addListener('interactionCreate', (i: Interaction) => this._handleInteraction(i));
   }
 
   use(handler: BaseInteractionManager): void;
   use(handlers: BaseInteractionManager[]): void;
   use(handlers: BaseInteractionManager | BaseInteractionManager[]): void {
     const h: BaseInteractionManager[] = Array.isArray(handlers) ? handlers : [handlers];
-    h.forEach((h) => {
-      this.managers.set(h._interactionCtor, h);
-    });
+    for (const manager of h) {
+      this.managers.set(manager._interactionCtor, manager);
+    }
   }
 
   private _handleInteraction(interaction: Interaction) {
