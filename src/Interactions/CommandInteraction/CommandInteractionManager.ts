@@ -7,10 +7,14 @@ export default class CommandInteractionManager extends BaseInteractionManager<
   CommandInteractionHandler,
   Snowflake
 > {
+  constructor() {
+    super(CommandInteraction);
+  }
+
   protected getInteractionId(interaction: CommandInteraction): string {
-    throw new Error('Method not implemented.');
+    return interaction.commandId;
   }
   protected callInteraction(interaction: CommandInteraction): void {
-    throw new Error('Method not implemented.');
+    this.getInteractionHandler(interaction).run();
   }
 }

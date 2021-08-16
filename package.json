@@ -1,21 +1,36 @@
 {
-  "name": "interactionsystemtest",
+  "name": "interaction-djs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simple interaction wrapper for discord.js. ",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx ts-node src/index.ts"
+    "build": "tsc",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write",
+    "lint": "eslint src --fix",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.2",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "discord.js": "^13.2.0-dev.1628856244.615afab",
+    "discord.js": "latest",
     "dotenv": "^10.0.0"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }

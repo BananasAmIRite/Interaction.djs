@@ -1,6 +1,16 @@
-import InteractionClient from './InteractionClient';
-import * as dotenv from 'dotenv';
+import CommandInteractionHandler from './Interactions/CommandInteraction/CommandInteractionHandler';
+import CommandInteractionManager from './Interactions/CommandInteraction/CommandInteractionManager';
+import BaseInteractionHandler from './InteractionsAPI/BaseInteractionHandler';
+import InteractionEventHandler from './InteractionsAPI/InteractionEventHandler';
+import BaseInteractionManager from './InteractionsAPI/Managers/BaseInteractionManager';
 
-dotenv.config();
-
-new InteractionClient({ intents: [] }).login(process.env.CLIENT_TOKEN);
+export {
+  // base API
+  BaseInteractionHandler,
+  BaseInteractionManager,
+  // implementations
+  // CommandInteraction
+  CommandInteractionManager,
+  CommandInteractionHandler,
+};
+export default InteractionEventHandler;
