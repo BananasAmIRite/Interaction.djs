@@ -4,15 +4,13 @@ Interaction.DJS is a simple and lightweight wrapper for discord.js's interaction
 
 ## Usage
 
-### Typescript:
-
-Since the project is written in typescript, importing it is relatively easy.
+### Typescript
 
 ```typescript
 import InteractionEventHandler, { CommandInteractionManager } from 'interaction-djs';
 import { Client } from 'discord.js';
 const bot = new Client({
-  intents: [],
+  intents: ['GUILD'],
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
@@ -25,14 +23,12 @@ bot.login('TOKEN');
 
 ### CommonJS:
 
-Importing using CommonJS is a bit harder:
-
 ```javascript
 const { CommandInteractionManager } = require('interaction-djs');
 const InteractionEventHandler = require('interaction-djs').default;
 const { Client } = require('discord.js');
 const bot = new Client({
-  intents: [],
+  intents: ['GUILD'],
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
@@ -45,9 +41,9 @@ bot.login('TOKEN');
 
 ## Implementing new Interactions
 
-To implement a new type of interaction using the handler api:
+Implement a new type of interaction using the handler api
 
-**This shows the implementation for CommandInteraction**
+**Implementation with CommandInteractions**
 
 ```typescript
 import { CommandInteraction, Snowflake } from 'discord.js';
@@ -96,7 +92,7 @@ import InteractionEventHandler from 'interaction-djs';
 import { Client } from 'discord.js';
 import CommandInteractionManager from './CommandInteractionManager';
 const bot = new Client({
-  intents: [],
+  intents: ['GUILD'],
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
