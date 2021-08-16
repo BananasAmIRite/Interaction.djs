@@ -7,7 +7,7 @@ export interface CommandInteractionHandlerOptions
     ChatInputApplicationCommandData {}
 
 export default abstract class CommandInteractionHandler extends BaseInteractionHandler {
-  constructor(public commandOptions: CommandInteractionHandlerOptions, manager: CommandInteractionManager) {
+  public constructor(public commandOptions: CommandInteractionHandlerOptions, manager: CommandInteractionManager) {
     super(commandOptions);
     this.commandOptions = {
       ...commandOptions,
@@ -16,5 +16,5 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
     manager.registerInteractionHandler(commandOptions.name, this);
   }
 
-  public abstract run(interaction: CommandInteraction): Promise<any>;
+  public abstract run(interaction: CommandInteraction): Promise<unknown>;
 }
