@@ -15,7 +15,10 @@
     "postversion": "git push && git push --tags"
   },
   "author": "BananasAmIRite",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BananasAmIRite/Interaction.djs.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.6.1",
