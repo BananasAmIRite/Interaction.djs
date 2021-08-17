@@ -21,6 +21,7 @@ export interface CommandInteractionHandlerOptions
 export default abstract class CommandInteractionHandler extends BaseInteractionHandler {
   /**
    * @constructor
+   * @method
    * @param {CommandInteractionHandlerOptions} commandOptions The command options to supply
    * @param {CommandInteractionManager} manager The CommandInteractionManager
    * @public
