@@ -14,7 +14,7 @@ const bot = new Client({
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
-const cmdManager = new CommandInteractionManager(); // create a manager for command interactions
+const cmdManager = new CommandInteractionManager(bot); // create a manager for command interactions
 evtHandler.hook(bot); // connect handler to bot
 evtHandler.use(cmdManager); // use the command interaction manager
 
@@ -34,7 +34,7 @@ const bot = new Client({
 // Main file, index
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
-const cmdManager = new CommandInteractionManager(); // create a manager for command interactions
+const cmdManager = new CommandInteractionManager(bot); // create a manager for command interactions
 evtHandler.hook(bot); // connect handler to bot
 evtHandler.use(cmdManager); // use the command interaction manager
 
