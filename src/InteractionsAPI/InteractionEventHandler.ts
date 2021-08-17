@@ -1,21 +1,21 @@
-import { Client, Interaction } from 'discord.js';
+import { Client, Collection, Interaction } from 'discord.js';
 import BaseInteractionManager from './Managers/BaseInteractionManager';
 
 export default class InteractionEventHandler {
-  private managers: Map<{ new (): Interaction }, BaseInteractionManager>;
+  private managers: Collection<{ new (): Interaction }, BaseInteractionManager>;
   constructor() {
-    this.managers = new Map();
+    this.managers = new Collection();
   }
 
   hook(client: Client): void {
-    client.addListener('interactionCreate', (i: Interaction) => this._handleInteraction(i));
+    client.on('interactionCreate', (i: Interaction) => this._handleInteraction(i));
   }
 
   use(handler: BaseInteractionManager): void;
   use(handlers: BaseInteractionManager[]): void;
   use(handlers: BaseInteractionManager | BaseInteractionManager[]): void {
-    const h: BaseInteractionManager[] = Array.isArray(handlers) ? handlers : [handlers];
-    for (const manager of h) {
+    const managers: BaseInteractionManager[] = Array.isArray(handlers) ? handlers : [handlers];
+    for (const manager of managers) {
       this.managers.set(manager._interactionCtor, manager);
     }
   }

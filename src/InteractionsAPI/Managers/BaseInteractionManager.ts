@@ -1,4 +1,4 @@
-import { Interaction } from 'discord.js';
+import { Collection, Interaction } from 'discord.js';
 import BaseInteractionHandler from '../BaseInteractionHandler';
 
 export default abstract class BaseInteractionManager<
@@ -6,9 +6,9 @@ export default abstract class BaseInteractionManager<
   H extends BaseInteractionHandler = any,
   ID_TYPE = string,
 > {
-  protected interactionHandlers: Map<ID_TYPE, H>;
+  protected interactionHandlers: Collection<ID_TYPE, H>;
   constructor(public _interactionCtor: { new (...args: any[]): I }) {
-    this.interactionHandlers = new Map();
+    this.interactionHandlers = new Collection();
     this._interactionCtor = _interactionCtor;
   }
 

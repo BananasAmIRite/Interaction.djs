@@ -19,6 +19,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
   }
 
   public async refreshCommands(guildId?: Snowflake): Promise<void> {
+    if (typeof guildId !== 'string') throw new TypeError(`The guildId must be typeof 'string' `);
     const data: ApplicationCommandData[] = [];
     this.interactionHandlers.forEach((handler) => {
       data.push(handler.commandOptions);
@@ -27,9 +28,13 @@ export default class CommandInteractionManager extends BaseInteractionManager<
     if (guildId) {
       const guild = await this.client.guilds.fetch(guildId);
       if (!guild) return;
-      await guild.commands.set(data);
+      await guild.commands.set(data).catch((err) => {
+        throw new Error(err);
+      });
     } else {
-      await this.client.application?.commands.set(data);
+      await this.client.application?.commands.set(data).catch((err) => {
+        throw new Error(err);
+      });
     }
   }
 }
