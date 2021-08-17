@@ -5,7 +5,7 @@ import BaseInteractionHandler from '../BaseInteractionHandler';
  * @type
  */
 
-export type InteractionCtor<I extends Interaction = any> = { new (...args: any[]): I };
+export type InteractionCtor<I extends Interaction> = { new (...args: any[]): I };
 
 /**
  * The base interaction manager
@@ -13,8 +13,8 @@ export type InteractionCtor<I extends Interaction = any> = { new (...args: any[]
  */
 
 export default abstract class BaseInteractionManager<
-  I extends Interaction = any,
-  H extends BaseInteractionHandler = any,
+  I extends Interaction,
+  H extends BaseInteractionHandler,
   ID_TYPE = string,
 > {
   /**
@@ -28,7 +28,7 @@ export default abstract class BaseInteractionManager<
    * @param {InteractionCtor} _interactionCtor
    * @public
    */
-  public constructor(public _interactionCtor: InteractionCtor) {
+  public constructor(public _interactionCtor: InteractionCtor<I>) {
     this.interactionHandlers = new Collection();
     this._interactionCtor = _interactionCtor;
   }

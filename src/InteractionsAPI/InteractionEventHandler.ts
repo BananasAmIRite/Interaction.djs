@@ -1,4 +1,5 @@
 import { Client, Collection, Interaction } from 'discord.js';
+import BaseInteractionHandler from './BaseInteractionHandler';
 import BaseInteractionManager from './Managers/BaseInteractionManager';
 
 /**
@@ -10,13 +11,13 @@ export default class InteractionEventHandler {
    * The managers of the Event handler
    * @private
    */
-  private managers: Collection<{ new (): Interaction }, BaseInteractionManager>;
+  private managers: Collection<{ new (): Interaction }, BaseInteractionManager<Interaction, BaseInteractionHandler>>;
 
   /**
    * @constructor
-   * @private
+   * @public
    */
-  private constructor() {
+  public constructor() {
     this.managers = new Collection();
   }
 
@@ -33,13 +34,19 @@ export default class InteractionEventHandler {
   /**
    * Pass in new handlers to use
    * @param handlers The handlers to use
-   * @type {(BaseInteractionManager|Array)}
+   * @typedef {BaseInteractionManager|Array}
    * @public
    */
-  public use(handler: BaseInteractionManager): void;
-  public use(handlers: BaseInteractionManager[]): void;
-  public use(handlers: BaseInteractionManager | BaseInteractionManager[]): void {
-    const managers: BaseInteractionManager[] = Array.isArray(handlers) ? handlers : [handlers];
+  public use(handler: BaseInteractionManager<Interaction, BaseInteractionHandler>): void;
+  public use(handlers: BaseInteractionManager<Interaction, BaseInteractionHandler>[]): void;
+  public use(
+    handlers:
+      | BaseInteractionManager<Interaction, BaseInteractionHandler>
+      | BaseInteractionManager<Interaction, BaseInteractionHandler>[],
+  ): void {
+    const managers: BaseInteractionManager<Interaction, BaseInteractionHandler>[] = Array.isArray(handlers)
+      ? handlers
+      : [handlers];
     for (const manager of managers) {
       this.managers.set(manager._interactionCtor, manager);
     }
