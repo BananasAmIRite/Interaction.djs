@@ -31,6 +31,8 @@ const bot = new Client({
   intents: ['GUILD'],
 });
 
+// Main file, index
+
 const evtHandler = new InteractionEventHandler(); // create the event handler
 const cmdManager = new CommandInteractionManager(); // create a manager for command interactions
 evtHandler.hook(bot); // connect handler to bot
@@ -61,7 +63,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
   }
 
   protected getInteractionId(interaction: CommandInteraction): Snowflake {
-    return interaction.commandName; // unique ID, in the case, the command name
+    return interaction.commandName; // unique ID, in this case, the command name
   }
   protected callInteraction(interaction: CommandInteraction): void {
     this.getInteractionHandler(interaction).run(interaction); // get the interaction handler for the interaction by the id and call run() on it
