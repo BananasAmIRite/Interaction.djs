@@ -2,12 +2,12 @@ import { Interaction } from 'discord.js';
 import BaseInteractionHandler from '../BaseInteractionHandler';
 
 export default abstract class BaseInteractionManager<
-  I extends Interaction = any,
-  H extends BaseInteractionHandler = any,
+  I extends Interaction = unknown,
+  H extends BaseInteractionHandler = unknown,
   ID_TYPE = string,
 > {
   protected interactionHandlers: Map<ID_TYPE, H>;
-  constructor(public _interactionCtor: { new (...args: any[]): I }) {
+  constructor(public _interactionCtor: { new (...args: unknown[]): I }) {
     this.interactionHandlers = new Map();
     this._interactionCtor = _interactionCtor;
   }

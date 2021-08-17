@@ -6,7 +6,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
   CommandInteraction,
   CommandInteractionHandler
 > {
-  constructor(private client: Client) {
+  public constructor(private client: Client) {
     super(CommandInteraction);
     this.client = client;
   }

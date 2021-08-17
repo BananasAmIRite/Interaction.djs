@@ -4,9 +4,7 @@ Interaction.DJS is a simple and lightweight wrapper for discord.js's interaction
 
 ## Usage
 
-### Typescript:
-
-Since the project is written in typescript, importing it is relatively easy.
+### Typescript
 
 ```typescript
 import InteractionEventHandler, { CommandInteractionManager } from 'interaction-djs';
@@ -25,8 +23,6 @@ bot.login('TOKEN');
 
 ### CommonJS:
 
-Importing using CommonJS is a bit harder:
-
 ```javascript
 const { CommandInteractionManager } = require('interaction-djs');
 const InteractionEventHandler = require('interaction-djs').default;
@@ -34,6 +30,8 @@ const { Client } = require('discord.js');
 const bot = new Client({
   intents: [],
 });
+
+// Main file, index
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
 const cmdManager = new CommandInteractionManager(); // create a manager for command interactions
@@ -45,9 +43,9 @@ bot.login('TOKEN');
 
 ## Implementing new Interactions
 
-To implement a new type of interaction using the handler api:
+Implement a new type of interaction using the handler api
 
-**This shows the implementation for CommandInteraction**
+**Implementation with CommandInteractions**
 
 ```typescript
 import { CommandInteraction, Snowflake } from 'discord.js';
@@ -65,7 +63,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
   }
 
   protected getInteractionId(interaction: CommandInteraction): Snowflake {
-    return interaction.commandName; // unique ID, in the case, the command name
+    return interaction.commandName; // unique ID, in this case, the command name
   }
   protected callInteraction(interaction: CommandInteraction): void {
     this.getInteractionHandler(interaction).run(interaction); // get the interaction handler for the interaction by the id and call run() on it
@@ -95,6 +93,8 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
 import InteractionEventHandler from 'interaction-djs';
 import { Client } from 'discord.js';
 import CommandInteractionManager from './CommandInteractionManager';
+// index.ts
+
 const bot = new Client({
   intents: [],
 });
