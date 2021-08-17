@@ -10,7 +10,7 @@ Interaction.DJS is a simple and lightweight wrapper for discord.js's interaction
 import InteractionEventHandler, { CommandInteractionManager } from 'interaction-djs';
 import { Client } from 'discord.js';
 const bot = new Client({
-  intents: ['GUILD'],
+  intents: [],
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
@@ -28,7 +28,7 @@ const { CommandInteractionManager } = require('interaction-djs');
 const InteractionEventHandler = require('interaction-djs').default;
 const { Client } = require('discord.js');
 const bot = new Client({
-  intents: ['GUILD'],
+  intents: [],
 });
 
 // Main file, index
@@ -93,8 +93,10 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
 import InteractionEventHandler from 'interaction-djs';
 import { Client } from 'discord.js';
 import CommandInteractionManager from './CommandInteractionManager';
+// index.ts
+
 const bot = new Client({
-  intents: ['GUILD'],
+  intents: [],
 });
 
 const evtHandler = new InteractionEventHandler(); // create the event handler
