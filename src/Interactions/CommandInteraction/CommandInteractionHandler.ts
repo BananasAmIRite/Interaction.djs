@@ -29,7 +29,7 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
    */
   public constructor(public commandOptions: CommandInteractionHandlerOptions, manager?: CommandInteractionManager) {
     super(commandOptions);
-    if (!(manager instanceof CommandInteractionManager))
+    if (manager && !(manager instanceof CommandInteractionManager))
       throw new TypeError(`The manager must be an instance of a CommandInteractionManager`);
     this.commandOptions = {
       ...commandOptions,
