@@ -1,6 +1,6 @@
 import { Client, Collection, Interaction } from 'discord.js';
 import BaseInteractionHandler from './BaseInteractionHandler';
-import BaseInteractionManager from './Managers/BaseInteractionManager';
+import BaseInteractionManager from './BaseInteractionManager';
 
 /**
  * The Interaction Event handler, handles Interaction events

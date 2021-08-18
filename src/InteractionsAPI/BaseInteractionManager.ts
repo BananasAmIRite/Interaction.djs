@@ -1,5 +1,5 @@
 import { Collection, Interaction } from 'discord.js';
-import BaseInteractionHandler from '../BaseInteractionHandler';
+import BaseInteractionHandler from './BaseInteractionHandler';
 
 /**
  * @type

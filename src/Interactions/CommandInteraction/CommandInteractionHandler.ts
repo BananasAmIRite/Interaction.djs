@@ -20,21 +20,22 @@ export interface CommandInteractionHandlerOptions
 
 export default abstract class CommandInteractionHandler extends BaseInteractionHandler {
   /**
+   * Handler for a Command Interaction. Will auto register with the manager supplied.
    * @constructor
    * @method
    * @param {CommandInteractionHandlerOptions} commandOptions The command options to supply
    * @param {CommandInteractionManager} manager The CommandInteractionManager
    * @public
    */
-  public constructor(public commandOptions: CommandInteractionHandlerOptions, manager: CommandInteractionManager) {
+  public constructor(public commandOptions: CommandInteractionHandlerOptions, manager?: CommandInteractionManager) {
+    super(commandOptions);
     if (!(manager instanceof CommandInteractionManager))
       throw new TypeError(`The manager must be an instance of a CommandInteractionManager`);
-    super(commandOptions);
     this.commandOptions = {
       ...commandOptions,
       type: 'CHAT_INPUT',
     };
-    manager.registerInteractionHandler(commandOptions.name, this);
+    if (manager) manager.registerInteractionHandler(commandOptions.name, this);
   }
 
   /**
@@ -44,6 +45,5 @@ export default abstract class CommandInteractionHandler extends BaseInteractionH
    * @public
    * @abstract
    */
-
   public abstract run(interaction: CommandInteraction): Promise<unknown>;
 }

@@ -1,5 +1,5 @@
 import { ApplicationCommandData, Client, CommandInteraction, Snowflake } from 'discord.js';
-import BaseInteractionManager from '../../InteractionsAPI/Managers/BaseInteractionManager';
+import BaseInteractionManager from '../../InteractionsAPI/BaseInteractionManager';
 import CommandInteractionHandler from './CommandInteractionHandler';
 
 /**
@@ -18,8 +18,8 @@ export default class CommandInteractionManager extends BaseInteractionManager<
    * @param {Client} client The Discord.js Client
    */
   public constructor(private client: Client) {
-    if (!(client instanceof Client)) throw new TypeError(`The client must be an instance of a discord.js Client`);
     super(CommandInteraction);
+    if (!(client instanceof Client)) throw new TypeError(`The client must be an instance of a discord.js Client`);
     this.client = client;
   }
 
@@ -30,7 +30,6 @@ export default class CommandInteractionManager extends BaseInteractionManager<
    * @method
    * @returns
    */
-
   protected getInteractionId(interaction: CommandInteraction): Snowflake {
     if (!(interaction instanceof CommandInteraction))
       throw new TypeError(`Interaction must be an instance of a CommandInteraction`);
@@ -56,9 +55,8 @@ export default class CommandInteractionManager extends BaseInteractionManager<
    * @method
    * @returns
    */
-
   public async refreshCommands(guildId?: Snowflake): Promise<void> {
-    if (typeof guildId !== 'string') throw new TypeError(`The guildId must be typeof 'string' `);
+    if (guildId && typeof guildId !== 'string') throw new TypeError(`The guildId must be typeof 'string' `);
     const data: ApplicationCommandData[] = [];
     this.interactionHandlers.forEach((handler) => {
       data.push(handler.commandOptions);

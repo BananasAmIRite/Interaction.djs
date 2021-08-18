@@ -45,6 +45,7 @@ bot.login('TOKEN');
 
 Implement a new type of interaction using the handler api
 
+**NOTE: When implementing custom interaction functionality, please compile to ES2015 Classes and above**
 **Implementation with CommandInteractions**
 
 ```typescript
@@ -105,4 +106,56 @@ evtHandler.hook(bot); // connect handler to bot
 evtHandler.use(cmdManager); // use the command interaction manager
 
 bot.login('TOKEN');
+```
+
+## Using CommandInteraction Implementation
+
+### CommandInteraction Implementation
+
+```typescript
+import { CommandInteraction, MessageActionRow, MessageButton } from 'discord.js';
+import { CommandInteractionHandler, CommandInteractionManager } from 'interaction-djs';
+// testcommand.ts
+
+export default class TestCommand extends CommandInteractionHandler {
+  constructor(manager?: CommandInteractionManager) {
+    super(
+      {
+        name: 'test',
+        description: 'test',
+      },
+      manager, // pass in the manager if applicable
+    );
+  }
+  override async run(interaction: CommandInteraction): Promise<void> {
+    // put code here
+    interaction.reply({ content: 'Test succeeded!' });
+  }
+}
+```
+
+### Registering CommandInteraction
+
+```typescript
+import { Client } from 'discord.js';
+import InteractionEventHandler, { CommandInteractionManager } from 'interaction-djs';
+import TestCommand from './testcommand';
+// index.ts
+
+const bot = new Client({ intents: [] });
+
+const evtHandler = new InteractionEventHandler();
+const cmdManager = new CommandInteractionManager(bot);
+evtHandler.hook(bot);
+evtHandler.use([cmdManager, btnManager]);
+const testCommand = new TestCommand();
+cmdManager.registerInteractionHandler(testCommand.customId, testCommand); // registers the command
+// Alternatively, you could do:
+// new TestCommand(cmdManager);
+
+bot.login('TOKEN');
+bot.on('ready', async () => {
+  cmdManager.refreshCommands(); // this refreshes the commands globally. It may take up to an hour to show in all servers
+  // You could also refresh with a guild ID parameter to refresh it in a guild instantly
+});
 ```
