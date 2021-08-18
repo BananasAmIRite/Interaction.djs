@@ -147,9 +147,9 @@ const bot = new Client({ intents: [] });
 const evtHandler = new InteractionEventHandler();
 const cmdManager = new CommandInteractionManager(bot);
 evtHandler.hook(bot);
-evtHandler.use([cmdManager, btnManager]);
+evtHandler.use([cmdManager]);
 const testCommand = new TestCommand();
-cmdManager.registerInteractionHandler(testCommand.customId, testCommand); // registers the command
+cmdManager.registerInteractionHandler(testCommand.commandOptions.name, testCommand); // registers the command
 // Alternatively, you could do:
 // new TestCommand(cmdManager);
 
