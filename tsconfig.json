@@ -1,34 +1,10 @@
 {
-  "ts-node": {
-    "files": true
-  },
   "compilerOptions": {
-    "moduleResolution": "node",
-    "lib": ["esnext"],
     "module": "commonjs",
-    "target": "esnext",
-    "outDir": "dist",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "resolveJsonModule": true,
-    "importHelpers": true,
-    "strict": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitOverride": true,
-    "removeComments": false,
-    "strictPropertyInitialization": true,
-    "types": ["node"],
-    "typeRoots": []
+    "target": "es2015",
+    "declaration": true,
+    "outDir": "./dist"
   },
-
-  "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "tests"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
