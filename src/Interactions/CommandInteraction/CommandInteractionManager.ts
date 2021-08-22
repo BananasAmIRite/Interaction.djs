@@ -1,5 +1,5 @@
 import { ApplicationCommandData, Client, CommandInteraction, Snowflake } from 'discord.js';
-import BaseInteractionManager from '../../InteractionsAPI/BaseInteractionManager';
+import Refreshable from '../Refreshable';
 import CommandInteractionHandler from './CommandInteractionHandler';
 
 /**
@@ -8,19 +8,14 @@ import CommandInteractionHandler from './CommandInteractionHandler';
  * @class
  */
 
-export default class CommandInteractionManager extends BaseInteractionManager<
-  CommandInteraction,
-  CommandInteractionHandler
-> {
+export default class CommandInteractionManager extends Refreshable<CommandInteraction, CommandInteractionHandler> {
   /**
    * @constructor
    * @public
    * @param {Client} client The Discord.js Client
    */
-  public constructor(private client: Client) {
-    super(CommandInteraction);
-    if (!(client instanceof Client)) throw new TypeError(`The client must be an instance of a discord.js Client`);
-    this.client = client;
+  public constructor(client: Client) {
+    super(client, CommandInteraction);
   }
 
   /**
@@ -48,30 +43,7 @@ export default class CommandInteractionManager extends BaseInteractionManager<
     this.getInteractionHandler(interaction)?.run(interaction);
   }
 
-  /**
-   * Refreshes Guild or Global Commands
-   * @param {Snowflake|String} guildId The guild Id to refresh Commands on
-   * @public
-   * @method
-   * @returns
-   */
-  public async refreshCommands(guildId?: Snowflake): Promise<void> {
-    if (guildId && typeof guildId !== 'string') throw new TypeError(`The guildId must be typeof 'string' `);
-    const data: ApplicationCommandData[] = [];
-    this.interactionHandlers.forEach((handler) => {
-      data.push(handler.commandOptions);
-    });
-
-    if (guildId) {
-      const guild = await this.client.guilds.fetch(guildId);
-      if (!guild) return;
-      await guild.commands.set(data).catch((err) => {
-        throw new Error(err);
-      });
-    } else {
-      await this.client.application?.commands.set(data).catch((err) => {
-        throw new Error(err);
-      });
-    }
+  protected getHandlerCommandData(handler: CommandInteractionHandler): ApplicationCommandData {
+    return handler.commandOptions;
   }
 }
