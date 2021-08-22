@@ -46,6 +46,7 @@ bot.login('TOKEN');
 Implement a new type of interaction using the handler api
 
 **NOTE: When implementing custom interaction functionality, please compile to ES2015 Classes and above**
+
 **Implementation with CommandInteractions**
 
 ```typescript
