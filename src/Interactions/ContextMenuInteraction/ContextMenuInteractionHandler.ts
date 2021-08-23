@@ -1,14 +1,24 @@
 import { ContextMenuInteraction, MessageApplicationCommandData } from 'discord.js';
 import BaseInteractionHandler, { BaseInteractionHandlerOptions } from '../../InteractionsAPI/BaseInteractionHandler';
-import { CommandInteractionHandlerOptions } from '../CommandInteraction/CommandInteractionHandler';
+import { Optional } from '../../utils/TypeUtils';
 import ContextMenuInteractionManager from './ContextMenuInteractionManager';
 
-export interface ContextMenuInteractionOptions extends BaseInteractionHandlerOptions, MessageApplicationCommandData {}
+// this is a thing used internally because 'type' is required here
+interface ContextMenuOptions extends BaseInteractionHandlerOptions, MessageApplicationCommandData {}
+
+// this is the actual thing you will be passing in
+export interface ContextMenuInteractionOptions
+  extends BaseInteractionHandlerOptions,
+    Optional<MessageApplicationCommandData, 'type'> {}
 
 export default abstract class ContextMenuInteractionHandler extends BaseInteractionHandler {
-  constructor(public contextMenuOptions: CommandInteractionHandlerOptions, manager?: ContextMenuInteractionManager) {
+  public contextMenuOptions: ContextMenuOptions;
+  constructor(contextMenuOptions: ContextMenuInteractionOptions, manager?: ContextMenuInteractionManager) {
     super(contextMenuOptions);
-    this.contextMenuOptions = contextMenuOptions;
+    this.contextMenuOptions = {
+      ...contextMenuOptions,
+      type: 'MESSAGE',
+    };
     if (manager) manager.registerInteractionHandler(contextMenuOptions.name, this);
   }
 

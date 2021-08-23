@@ -1,6 +1,6 @@
 import { Client, Collection, Interaction } from 'discord.js';
 import BaseInteractionHandler from './BaseInteractionHandler';
-import BaseInteractionManager from './BaseInteractionManager';
+import BaseInteractionManager, { InteractionCtor } from './BaseInteractionManager';
 
 /**
  * The Interaction Event handler, handles Interaction events
@@ -11,7 +11,10 @@ export default class InteractionEventHandler {
    * The managers of the Event handler
    * @private
    */
-  private managers: Collection<{ new (): Interaction }, BaseInteractionManager<Interaction, BaseInteractionHandler>>;
+  private managers: Collection<
+    InteractionCtor<Interaction>,
+    BaseInteractionManager<Interaction, BaseInteractionHandler>
+  >;
 
   /**
    * @constructor
@@ -47,6 +50,7 @@ export default class InteractionEventHandler {
     const managers: BaseInteractionManager<Interaction, BaseInteractionHandler>[] = Array.isArray(handlers)
       ? handlers
       : [handlers];
+
     for (const manager of managers) {
       this.managers.set(manager._interactionCtor, manager);
     }
