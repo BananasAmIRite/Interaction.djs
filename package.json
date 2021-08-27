@@ -16,6 +16,7 @@
     "postversion": "git push && git push --tags"
   },
   "author": "BananasAmIRite",
+  "contributors": ["Cold tQ"],
   "repository": {
     "type": "git",
     "url": "https://github.com/BananasAmIRite/Interaction.djs.git"
